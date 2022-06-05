@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Imags Picker
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row *ngIf="!imagePaths">
+      <ion-col size="4">
+        <ion-skeleton-text animated style="width: 100%; height: 120px;"></ion-skeleton-text>
+      </ion-col>
+      <ion-col size="4">
+        <ion-skeleton-text animated style="width: 100%; height: 120px;"></ion-skeleton-text>
+      </ion-col>
+      <ion-col size="4">
+        <ion-skeleton-text animated style="width: 100%; height: 120px;"></ion-skeleton-text>
+      </ion-col>
+      <ion-col size="4">
+        <ion-skeleton-text animated style="width: 100%; height: 120px;"></ion-skeleton-text>
+      </ion-col>
+      <ion-col size="4">
+        <ion-skeleton-text animated style="width: 100%; height: 120px;"></ion-skeleton-text>
+      </ion-col>
+      <ion-col size="4">
+        <ion-skeleton-text animated style="width: 100%; height: 120px;"></ion-skeleton-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="4" class="image" *ngFor="let imagePath of imagePaths"
+        [ngStyle]="{'background-image': 'url(' + (url + imagePath.img) + ')'}">
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div *ngIf="progress != 0">
+    <ion-badge color="primary"><small>uploading: {{ progress }}%</small></ion-badge>
+    <ion-progress-bar value="{{ progress/100 }}"></ion-progress-bar>
+  </div>
+  <br>
+
+  <input enctype="multipart/form-data" type="file" multiple (change)="uploadWebFile($event)"
+    placeholder="upload a from web file" />
+  <br>
+  <br>
+  <br>
+  <br>
+</ion-content>
+
+<ion-toolbar class="footer">
+  <ion-button clear (click)="uploadFromCamera()">
+    Take Photo
+    <ion-icon name="camera"></ion-icon>
+  </ion-button>
+  <ion-button clear (click)="uploadFromImagePicker()">
+    From Gallery
+    <ion-icon name="images"></ion-icon>
+  </ion-button>
+</ion-toolbar>
